@@ -1,0 +1,27 @@
+EXPLORADOR UESC v1.5 - PACOTE INSTALAVEL (OFFLINE)
+
+O QUE E
+Pasta pronta para publicar na internet. Depois de aberto uma vez com internet, o app
+funciona sem conexao e pode ser instalado na tela inicial do celular.
+
+COMO PUBLICAR (escolha um, todos gratuitos)
+1) Netlify Drop: acesse app.netlify.com/drop e arraste esta pasta inteira.
+2) GitHub Pages: envie os arquivos para um repositorio e ative o Pages.
+3) Cloudflare Pages: crie um projeto e envie a pasta.
+O endereco precisa ser https. O GPS e o modo offline so funcionam em https.
+
+COMO INSTALAR NO CELULAR
+Android (Chrome): menu de tres pontos > Instalar app (ou Adicionar a tela inicial).
+iPhone (Safari): botao Compartilhar > Adicionar a Tela de Inicio.
+
+COMO ATUALIZAR
+Troque os arquivos e mude o numero em CACHE no arquivo sw.js (ex.: uesc-v1.6).
+
+ARQUIVOS
+index.html  o aplicativo inteiro       manifest.webmanifest  nome, cores e icones
+sw.js       guarda o app no aparelho    icons/                icones do app
+
+OBSERVACOES
+- O progresso fica no proprio aparelho (nao ha servidor).
+- A liga semanal mostra participantes de exemplo ate existir um servidor.
+- Calibre o GPS em Perfil > Outros > Calibrar o GPS antes de usar no campus.
