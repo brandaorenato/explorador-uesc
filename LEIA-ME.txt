@@ -1,4 +1,4 @@
-EXPLORADOR UESC v1.5 - PACOTE INSTALAVEL (OFFLINE)
+EXPLORADOR UESC v1.6 - PACOTE INSTALAVEL (OFFLINE)
 
 O QUE E
 Pasta pronta para publicar na internet. Depois de aberto uma vez com internet, o app
