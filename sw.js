@@ -1,6 +1,6 @@
-// Service worker do Explorador UESC v1.7: guarda o app no aparelho para abrir sem internet.
+// Service worker do Explorador UESC v1.8: guarda o app no aparelho para abrir sem internet.
 // Ao publicar uma nova versão, troque o número em CACHE para os aparelhos atualizarem.
-var CACHE='uesc-v1.7';
+var CACHE='uesc-v1.8';
 var ARQUIVOS=['./','index.html','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/icon-maskable-512.png'];
 self.addEventListener('install',function(e){e.waitUntil(caches.open(CACHE).then(function(c){return c.addAll(ARQUIVOS)}).then(function(){return self.skipWaiting()}))});
 self.addEventListener('activate',function(e){e.waitUntil(caches.keys().then(function(k){return Promise.all(k.filter(function(x){return x!==CACHE}).map(function(x){return caches.delete(x)}))}).then(function(){return self.clients.claim()}))});

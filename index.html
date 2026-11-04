@@ -3,7 +3,7 @@
 <head><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#17c3b2"><link rel="apple-touch-icon" href="icons/icon-192.png"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Explorador UESC v1.7</title>
+<title>Explorador UESC v1.8</title>
 <style>
 :root{--ground:#bfe6a8;--grass:#a8dc8c;--water:#8fd3f0;--waterhi:#c4ecfb;--road:#fffbea;--edge:#e6d9b0;--side:#cfc7b4;--roof:#f6f1e3;--tree:#5cb85c;--treehi:#86d37e;--ui:#fff;--text:#1e3a4a;--muted:#6b8794;--accent:#1fb5a6;--shadow:0 6px 20px rgba(20,60,80,.25);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-map="day"]){--ground:#1d3552;--grass:#1f4a4a;--water:#17527a;--waterhi:#2a7aa6;--road:#3c5a85;--edge:#2c4468;--side:#243a58;--roof:#35507a;--tree:#1f6f55;--treehi:#2f9070;--ui:#1c2e45;--text:#e8f3ff;--muted:#9ab4cc}}
@@ -462,6 +462,14 @@ button:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focu
 .evd .eact button.go{background:var(--accent);color:#fff}
 .evd .eact button:disabled{opacity:.7}
 .evd small.exm2{display:block;margin:8px 16px 0;color:var(--muted);font-size:12px}
+.sheet.open{z-index:14;top:0!important;max-height:none!important;border-radius:0!important;overflow:auto!important;display:block}
+.sheet.open .body{display:block!important}
+.sheet.open .ph{height:200px!important;border-radius:0!important;padding-top:env(safe-area-inset-top,0px)}
+.sheet.open .dt{display:none!important}
+.sheet.open .phn h2{font-size:21px!important;display:block!important;-webkit-line-clamp:unset!important}
+.sheet.open .close{top:calc(10px + env(safe-area-inset-top,0px));width:42px;height:42px;font-size:24px;z-index:3}
+#app.shon .top{display:none}
+.sheet.open .pha{top:calc(14px + env(safe-area-inset-top,0px))!important;bottom:auto!important;right:62px!important}
 </style>
 </head>
 <body>
@@ -538,7 +546,7 @@ var seed=7;function rnd(){seed=(seed*9301+49297)%233280;return seed/233280}
 function drawMe(){
   gMe.innerHTML='';
   var g=el('g',{id:'me'},gMe);
-  var ring=el('circle',{id:'range',cx:0,cy:0,r:RANGE,fill:'#1fb5a6','fill-opacity':.1,stroke:'#1fb5a6','stroke-width':1.5,'stroke-dasharray':'6 5'},gMe);
+  var ring=el('circle',{id:'range',cx:0,cy:0,r:RANGE*.4,fill:'#1fb5a6','fill-opacity':.1,stroke:'#1fb5a6','stroke-width':1.5,'stroke-dasharray':'6 5'},gMe);
   el('circle',{class:'pulse',cx:0,cy:0,r:12,fill:'#1fb5a6'},g);
   el('ellipse',{cx:0,cy:10,rx:9,ry:3.5,fill:'#000',opacity:.25},g);
   el('circle',{cx:0,cy:-6,r:21,fill:'none',stroke:'#1fb5a6','stroke-width':2.5,opacity:.85},g);el('circle',{cx:0,cy:-6,r:16.5,fill:'#fff'},g);
@@ -854,7 +862,7 @@ function setPv(v){pv=v;rerender()}
 function sub(t,b){return backBtn('setPv(\'home\')')+'<h2 style="margin:4px 0 12px">'+t+'</h2>'+b}
 function pfHtml(){
   if(pv==='tips')return sub('Dicas','<div class="card">📍 Chegue perto de um local e faça <b>check-in</b> para descobrir e ganhar XP e moedas.<br><br>🎟️ Toque nos <b>eventos</b> do rodapé do mapa para ver os detalhes e marcar presença.<br><br>📣 Avise a galera quando um local estiver lotado ou fechado.<br><br>📋 Complete <b>missões</b> e suba <b>medalhas</b> para ganhar moedas e liberar itens do avatar.</div>');
-  if(pv==='other')return sub('Outros','<div class="sm2">Explorador UESC · versão 1.7</div>'+themeHtml()+demoHtml()+calHtml()+pwaHtml()+'<div class="card" style="text-align:center">'+nameHtml()+'</div><button class="sm alt" onclick="showSplash()">Rever abertura</button><button class="sm alt" onclick="resetAll()">Zerar progresso</button>');
+  if(pv==='other')return sub('Outros','<div class="sm2">Explorador UESC · versão 1.8</div>'+themeHtml()+demoHtml()+calHtml()+pwaHtml()+'<div class="card" style="text-align:center">'+nameHtml()+'</div><button class="sm alt" onclick="showSplash()">Rever abertura</button><button class="sm alt" onclick="resetAll()">Zerar progresso</button>');
   var pc=pending();
   return'<div class="pcard" onclick="avEdit()"><div class="pav">'+avatarSvg(AV,66)+'</div><div style="flex:1;min-width:0"><b style="font-size:18px">'+esc(USER)+'</b><div class="sm2">'+ttl()+' · Nível '+lvl()+'</div></div><span style="font-size:24px;color:var(--muted)">›</span></div>'
   +'<div class="pass" onclick="goPrize(\'rewards\')"><span style="font-size:24px">🎁</span><div style="flex:1"><b>Trilha de recompensas</b><div class="bar" style="margin-top:6px"><i style="width:'+(xp%100)+'%"></i></div></div><span class="coin">'+COIN+' '+co+'</span></div>'
@@ -1248,7 +1256,7 @@ function calHtml(){var n=CAL.pts.length,st=n?'<b>'+n+(n===1?' ponto':' pontos')+
    +'<textarea id="calta" class="ta" rows="2" aria-label="Texto da calibração">'+esc(JSON.stringify({pts:CAL.pts}))+'</textarea><button class="sm alt" onclick="calCopy()">Copiar</button><button class="sm alt" onclick="calImport()">Importar</button><button class="sm alt" onclick="calReset()">Zerar</button></div>'}
 var accWarn=false;
 function accUpd(){var g=$('accr');if(!g)return;var a=(mode==='gps'&&player.acc)?player.acc:0;if(!a){g.style.display='none';return}
-  var q=P(player.x,player.y),bad=a>40;g.style.display='';g.setAttribute('transform','translate('+q[0]+','+q[1]+') scale(1.414,'+(1.414*VQ).toFixed(3)+')');g.setAttribute('r',Math.min(a,150));g.setAttribute('stroke',bad?'#ff9f1c':'#1fb5a6');g.setAttribute('fill',bad?'rgba(255,159,28,.14)':'rgba(31,181,166,.14)')}
+  var q=P(player.x,player.y),bad=a>40;g.style.display='';g.setAttribute('transform','translate('+q[0]+','+q[1]+') scale(1.414,'+(1.414*VQ).toFixed(3)+')');g.setAttribute('r',Math.min(a*.5,26));g.setAttribute('stroke',bad?'#ff9f1c':'#1fb5a6');g.setAttribute('fill',bad?'rgba(255,159,28,.14)':'rgba(31,181,166,.14)')}
 var _dm=drawMe;drawMe=function(){_dm();el('circle',{id:'accr',cx:0,cy:0,r:0,'stroke-width':1.5,'stroke-dasharray':'4 3',fill:'none'},gMe);accUpd()};
 var _sm3=scaleMarkers;scaleMarkers=function(){_sm3();accUpd()};
 // ===== v1.3 · MODO OFFLINE / INSTALAR =====
@@ -1855,6 +1863,11 @@ function attend(id){var e=EVENTS.filter(function(x){return x.id===id})[0],p=poi(
   if(!hasPos())return gpsNeed();
   if(!near(p))return toast('Chegue perto de '+p.name+' para marcar presença.');
   att[id]=1;here=p.id;bump('a',1);burst();addXp(e.xp,'🎟️ Presença confirmada! +'+e.xp+' XP');checkBadges();updNear(1);openEvent(id)}
+
+// ===== v1.8 · correções: anéis menores e sem bloquear toques, sem aviso de GPS, ficha em tela cheia =====
+gMe.style.pointerEvents='none';
+var _cu18=chipUpd;chipUpd=function(){_cu18();if(mode==='gps'&&GS==='ok'){clearTimeout(chipT);gst.className='gst'}};chipUpd();
+function openSheet(id){setFollow(false);selected=id;sv=null;drawPois();refreshSheet();sheet.classList.remove('peek');sheet.classList.add('open');sheet.scrollTop=0;$('app').classList.add('shon');document.querySelector('.top').classList.remove('s','f');updNear(1);flyTo(poi(id).x,poi(id).y,1,Math.min(view.w,430))}
 
 // ===== INÍCIO =====
 drawBase();drawMe();drawPois();drawChips();hud();updNear(1);refreshAv();refreshUser();applyView();navIcons();splashFirst();

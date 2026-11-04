@@ -1,4 +1,4 @@
-EXPLORADOR UESC v1.7 - PACOTE INSTALAVEL (OFFLINE)
+EXPLORADOR UESC v1.8 - PACOTE INSTALAVEL (OFFLINE)
 
 O QUE E
 Pasta pronta para publicar na internet. Depois de aberto uma vez com internet, o app
@@ -15,7 +15,7 @@ Android (Chrome): menu de tres pontos > Instalar app (ou Adicionar a tela inicia
 iPhone (Safari): botao Compartilhar > Adicionar a Tela de Inicio.
 
 COMO ATUALIZAR
-Troque os arquivos e mude o numero em CACHE no arquivo sw.js (ex.: uesc-v1.7).
+Troque os arquivos e mude o numero em CACHE no arquivo sw.js (ex.: uesc-v1.8).
 
 ARQUIVOS
 index.html  o aplicativo inteiro       manifest.webmanifest  nome, cores e icones
